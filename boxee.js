@@ -27,17 +27,29 @@ var boxee = {
 	},
 
 	/**
-	 * Description for resizeImage.
+	 * Fill the container with the image.
+	 * Note: Make sure that the image is fully loaded.
 	 *
 	 * @param {jQuery} image
 	 */
 	resizeImage: function(image){
-
+		var container = image.parent();
+        
+        var width = container.width();
+        var height = container.width() * image.height() / image.width();
+        
+        if( height < container.height() ){
+            height = container.height();
+            width = container.height() * image.width() / image.height();
+        }
+        
+        image.height(height);
+        image.width(width);
 	},
 
 	/**
 	 * Scale an image without lose aspect ratio.
-	 * Note: Make sure that the image is fully loaded. 
+	 * Note: Make sure that the image is fully loaded.
 	 *
 	 * @param {jQuery} image
 	 */

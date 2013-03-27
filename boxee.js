@@ -9,8 +9,20 @@ var boxee = {
 	 * Description for centerItem.
 	 *
 	 * @param {jQuery} item
+	 * @param {bool} horizontal
+	 * @param {bool} vertical
+	 * @param {bool} toParent
 	 */
-	centerItem: function(item){
+	centerItem: function(item, horizontal, vertical, toParent){
+
+	},
+
+	/**
+	 * Description for popup.
+	 *
+	 * @param {jQuery} content
+	 */
+	popup: function(content){
 
 	},
 
@@ -24,22 +36,40 @@ var boxee = {
 	},
 
 	/**
+	 * Description for scaleImage.
+	 *
+	 * @param {jQuery} image
+	 */
+	 scaleImage: function(image){
+
+	 },
+
+	/**
+	 * Description for simulatePlaceholder.
+	 *
+	 * @param {jQuery} inputElement
+	 */
+	 simulatePlaceholder: function(){
+
+	 },
+
+	/**
 	 * Description for trimText.
 	 *
 	 * @param {string} string
 	 * @param {int} size
-	 * @return 
+	 * @return trimmedString
 	 */
 	 trimText: function(){
 
 	 },
 
 	/**
-	 * Description for scaleImage.
+	 * Description for validateForm.
 	 *
-	 * @param {jQuery} image
+	 * @param {jQuery} form
 	 */
-	 scaleImage: function(image){
+	 validateForm: function(form){
 
 	 }
 

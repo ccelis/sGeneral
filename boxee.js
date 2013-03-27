@@ -36,11 +36,22 @@ var boxee = {
 	},
 
 	/**
-	 * Description for scaleImage.
+	 * Scale an image without lose aspect ratio.
+	 * Note: Make sure that the image is fully loaded. 
 	 *
 	 * @param {jQuery} image
 	 */
 	 scaleImage: function(image){
+	 	var container = image.parent();
+
+	 	var realHeight = image.height(),
+            realWidth = image.width();
+        
+        var ratio = [container.width() / realWidth, container.height() / realHeight ];
+        ratio = Math.min(ratio[0], ratio[1]);
+
+        image.width( realWidth * ratio );
+        image.height( realHeight * ratio );
 
 	 },
 

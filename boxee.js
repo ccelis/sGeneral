@@ -54,13 +54,43 @@ var boxee = {
 	 },
 
 	/**
-	 * Description for trimText.
+	 * Trim a string to a specified size.
+	 * Add suspension points if the string was trimmed.
 	 *
 	 * @param {string} string
 	 * @param {int} size
 	 * @return trimmedString
 	 */
-	 trimText: function(){
+	 trimText: function(string, size){
+
+	 	// Removes white space at the end of a string.
+	 	function trim (s){ return s.replace(/^\s+|\s+$/g, ''); }
+
+	 	var newString = string.split(" ");
+	 	var trimmedString = '';
+	 	var word = '';
+
+	 	for (var i = 0 ; i < newString.length; i ++) {
+	 		word = newString[i];
+	 		
+			if (trimmedString.length > size)	{
+				break;
+			} else {
+				trimmedString += word + ' ';
+
+				if(trimmedString.length - 1 > size){
+					trimmedString = trimmedString.substr(0, trimmedString.lastIndexOf(word));
+					break;
+				}
+			}
+
+	 	}
+
+	 	trimmedString = trim(trimmedString);
+
+	 	return ( trimmedString != string )
+	 		? trimmedString + '…' 
+	 		: trimmedString;
 
 	 },
 

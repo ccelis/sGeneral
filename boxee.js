@@ -1,6 +1,8 @@
 
 /**
  * Description for boxee.
+ * 
+ * @author Sexar
  */
 
 var boxee = {	
@@ -14,14 +16,42 @@ var boxee = {
      * @param {bool} toParent
      */
     centerItem: function(item, horizontal, vertical, toParent){
-
+        
     },
     
     /**
-     * Description for goTop.
+     * Go to the top of the page.
+     * Note: The default animation for the button is fadeIn and fadeOut, make sure
+     *       that the button have display none.
+     * 
+     * @param {jQuery} button
      */
-    goTop: function(){
+    goTop: function(button){
         
+        var scrollTimer = null,
+            $window = $(window),
+            targets = $('html, body'),
+            top = targets.children(0).position().top;
+        
+        $window.scroll(function(){
+            
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function(){
+                if ($window.scrollTop() <= top ) {
+                    targets.stop(true, true);
+                    button.fadeOut();
+                } else {
+                    button
+                        .fadeIn()
+                        .click(function(event){
+                            targets.animate({scrollTop: top}, 300);
+                            button.fadeOut();
+                            event.preventDefault();
+                        });
+                }
+            }, 100);
+            
+        });
     },
 
     /**
@@ -30,7 +60,7 @@ var boxee = {
      * @param {jQuery} content
      */
     popup: function(content){
-
+        
     },
 
     /**
@@ -75,12 +105,33 @@ var boxee = {
     },
 
     /**
-     * Description for simulatePlaceholder.
+     * Simulate a place holder of a input.
+     * This function could recive an array o inputs and uses the attribute data-placeholder.
      *
-     * @param {jQuery} inputElement
+     * @param {Array.<jQuery>} inputs
      */
-    simulatePlaceholder: function(inputElement){
-
+    simulatePlaceholder: function(inputs){
+        
+        inputs.each(function(){
+            var input = $(this);
+            var value = input.data('placeholder');
+            
+            // Initialize the input with placeholder value.
+            input.val(value);
+            
+            // Show placeholder.
+            input.focus(function(){
+                if(input.val() === value)
+                    input.val('');
+            });
+            
+            // Hide placeholder
+            input.blur(function(){
+                if(input.val() === '')
+                    input.val(value);
+            });
+        });
+        
     },
 
     /**
@@ -119,7 +170,7 @@ var boxee = {
         trimmedString = trim(trimmedString);
 
         return ( trimmedString != string )
-            ? trimmedString + 'É' 
+            ? trimmedString + '\u2026'
             : trimmedString;
 
     },
@@ -130,7 +181,7 @@ var boxee = {
      * @param {jQuery} form
      */
     validateForm: function(form){
-
+        
     }
 
 }

@@ -79,7 +79,7 @@ var boxee = {
      *
      * @param {jQuery} inputElement
      */
-    simulatePlaceholder: function(){
+    simulatePlaceholder: function(inputElement){
 
     },
 

@@ -28,6 +28,7 @@ var boxee = {
      */
     goTop: function(button){
         
+        // Initialize vars.
         var scrollTimer = null,
             $window = $(window),
             targets = $('html, body'),
@@ -36,11 +37,17 @@ var boxee = {
         $window.scroll(function(){
             
             clearTimeout(scrollTimer);
+            
             scrollTimer = setTimeout(function(){
+                
+                // Top of the page
                 if ($window.scrollTop() <= top ) {
+                    
                     targets.stop(true, true);
                     button.fadeOut();
+                    
                 } else {
+                    
                     button
                         .fadeIn()
                         .click(function(event){
@@ -48,7 +55,9 @@ var boxee = {
                             button.fadeOut();
                             event.preventDefault();
                         });
+                        
                 }
+                
             }, 100);
             
         });
@@ -108,7 +117,7 @@ var boxee = {
      * Simulate a place holder of a input.
      * This function could recive an array o inputs and uses the attribute data-placeholder.
      *
-     * @param {Array.<jQuery>} inputs
+     * @param {Array<jQuery>=} inputs
      */
     simulatePlaceholder: function(inputs){
         

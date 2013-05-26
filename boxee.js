@@ -7,16 +7,57 @@
 
 var boxee = {	
    
+   /**
+    * Add commas to a number.
+    *
+    * @param {float || integer || double} number
+    */
+   addCommas: function(number){
+       
+       var n, nLeft, nRight;
+       var rgx = /(\d+)(\d{3})/;
+       
+       // Parse to String.
+       number += '';
+       
+       n = number.split('.');
+       nLeft = n[0];
+       nRight = (n[1]) ? '.' + n[1] : '';
+       
+       while(rgx.test(nLeft))
+           nLeft = nLeft.replace(rgx, '$1' + ',' + '$2');
+       
+       return nLeft + nRight;
+       
+   },
+   
     /**
      * Description for centerItem.
      *
      * @param {jQuery} item
-     * @param {bool} horizontal
-     * @param {bool} vertical
      * @param {bool} toParent
      */
-    centerItem: function(item, horizontal, vertical, toParent){
+    centerItem: function(item, toParent){
         
+        var container = (toParent) ? item.parent() : $(window);
+        var position = item.css('position');
+        
+        // Obtains values.
+        var l = (container.width() - item.width()) / 2,
+            t = (container.height() - item.height()) / 2;
+        
+        // Check if the position is absolute to asign a left and top values.
+        if(position === 'absolute' || position === 'fixed')
+            item.css({
+                'left': l, 
+                'top': t
+            });
+        
+        else
+            item.css({
+                'margin-left': l, 
+                'margin-top': t
+            });
     },
     
     /**
@@ -61,15 +102,6 @@ var boxee = {
             }, 100);
             
         });
-    },
-
-    /**
-     * Description for popup.
-     *
-     * @param {jQuery} content
-     */
-    popup: function(content){
-        
     },
 
     /**
@@ -182,15 +214,6 @@ var boxee = {
             ? trimmedString + '\u2026'
             : trimmedString;
 
-    },
-
-    /**
-     * Description for validateForm.
-     *
-     * @param {jQuery} form
-     */
-    validateForm: function(form){
-        
     }
 
 }

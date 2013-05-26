@@ -10,7 +10,7 @@ var boxee = {
    /**
     * Add commas to a number.
     *
-    * @param {float || integer || double} number
+    * @param {number} number
     */
    addCommas: function(number){
        

@@ -214,6 +214,36 @@ var boxee = {
             ? trimmedString + '\u2026'
             : trimmedString;
 
-    }
+    },
+
+    /**
+     * Wait to the images are already loaded, then excecute a callback.
+     *
+     * @param {jQuery} images
+     * @param {function} callback
+     */
+     waitForImages: function(images, callback){
+        var totalimages = images.length,
+            loadedimages = 0;
+
+        function onImageLoaded(){
+
+            if(++loadedimages >= totalimages)
+                if(callback && typeof callback === 'function')
+                    callback();
+
+        }
+
+        images.each(function(){
+            var image = $(this);
+
+            if(image.get(0).complete)
+                onImageLoaded();
+
+            else
+                image.load(function(){ onImageLoaded(); });
+        });
+
+     }
 
 }
